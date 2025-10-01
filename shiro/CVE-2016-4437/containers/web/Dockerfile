@@ -1,0 +1,1 @@
+FROM vulhub/shiro:1.2.4

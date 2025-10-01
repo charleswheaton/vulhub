@@ -1,12 +1,18 @@
 services:
   discuz:
-    image: vulhub/discuz:7.2
     depends_on:
-      - db
+    - db
     ports:
-      - "8080:80"
+    - target: 80
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/discuz/Dockerfile
   db:
-    image: mysql:5.5
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: discuz
+    build:
+      context: .
+      dockerfile: containers/db/Dockerfile

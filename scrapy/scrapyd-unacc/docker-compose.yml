@@ -1,6 +1,8 @@
 version: '2'
 services:
-  scrapyd: 
-    image: vulhub/scrapyd:1.2.1
+  scrapyd:
     ports:
-      - "6800:6800"
+    - 0:6800
+    build:
+      context: .
+      dockerfile: containers/scrapyd/Dockerfile

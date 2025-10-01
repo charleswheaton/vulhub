@@ -1,0 +1,1 @@
+FROM vulhub/spring-cloud-function:3.2.2

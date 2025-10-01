@@ -1,12 +1,18 @@
 services:
- web:
-   image: vulhub/magento:2.2.7
-   depends_on:
+  web:
+    depends_on:
     - mysql
-   ports:
-    - "8080:80"
- mysql:
-   image: mysql:5.7
-   environment: 
+    ports:
+    - target: 80
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/web/Dockerfile
+  mysql:
+    environment:
     - MYSQL_ROOT_PASSWORD=root
     - MYSQL_DATABASE=magento
+    build:
+      context: .
+      dockerfile: containers/mysql/Dockerfile

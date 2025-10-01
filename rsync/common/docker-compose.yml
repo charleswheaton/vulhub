@@ -1,5 +1,7 @@
 services:
- rsync:
-   build: .
-   ports:
-    - "873:873"
+  rsync:
+    build: .
+    ports:
+    - target: 873
+      published: 0
+      protocol: tcp

@@ -1,15 +1,17 @@
 version: '2'
 services:
   redis:
-    image: redis
     ports:
-      - 6379:6379
+    - 0:6379
+    build:
+      context: .
+      dockerfile: containers/redis/Dockerfile
   celery:
-    image: vulhub/celery:3.1.23
-    volumes:
-      - .:/home/user
-    command: "celery -A tasks worker -l debug"
-    links: 
-      - redis
+    command: celery -A tasks worker -l debug
+    links:
+    - redis
     environment:
       CELERY_BROKER_URL: redis://redis/0
+    build:
+      context: .
+      dockerfile: containers/celery/Dockerfile

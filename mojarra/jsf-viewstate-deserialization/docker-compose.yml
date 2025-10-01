@@ -1,6 +1,8 @@
 version: '2'
 services:
   web:
-    image: vulhub/mojarra:2.1.28
     ports:
-      - "8080:8080"
+    - 0:8080
+    build:
+      context: .
+      dockerfile: containers/web/Dockerfile

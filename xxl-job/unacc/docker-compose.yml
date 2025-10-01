@@ -1,18 +1,24 @@
 version: '2'
 services:
- admin:
-   image: vulhub/xxl-job:2.2.0-admin
-   depends_on:
+  admin:
+    depends_on:
     - db
-   ports:
-    - "8080:8080"
- executor:
-   image: vulhub/xxl-job:2.2.0-executor
-   depends_on:
+    ports:
+    - 0:8080
+    build:
+      context: .
+      dockerfile: containers/admin/Dockerfile
+  executor:
+    depends_on:
     - admin
-   ports:
-    - "9999:9999"
- db:
-   image: mysql:5.7
-   environment: 
+    ports:
+    - 0:9999
+    build:
+      context: .
+      dockerfile: containers/executor/Dockerfile
+  db:
+    environment:
     - MYSQL_ROOT_PASSWORD=root
+    build:
+      context: .
+      dockerfile: containers/db/Dockerfile

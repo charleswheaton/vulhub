@@ -1,6 +1,8 @@
 version: '2'
 services:
- aria2:
-   image: vulhub/aria2:1.18.8
-   ports:
-    - "6800:6800"
+  aria2:
+    ports:
+    - 0:6800
+    build:
+      context: .
+      dockerfile: containers/aria2/Dockerfile

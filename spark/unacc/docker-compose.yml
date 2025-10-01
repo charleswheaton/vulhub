@@ -1,14 +1,26 @@
 services:
- master:
-   image: vulhub/spark:2.3.1
-   ports:
-    - "8080:8080"
-    - "7077:7077"
-    - "6066:6066"
- slave:
-   command: "slave spark://master:7077"
-   image: vulhub/spark:2.3.1
-   depends_on:
+  master:
+    ports:
+    - target: 8080
+      published: 0
+      protocol: tcp
+    - target: 7077
+      published: 0
+      protocol: tcp
+    - target: 6066
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/master/Dockerfile
+  slave:
+    command: slave spark://master:7077
+    depends_on:
     - master
-   ports:
-    - "8081:8081"
+    ports:
+    - target: 8081
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/slave/Dockerfile

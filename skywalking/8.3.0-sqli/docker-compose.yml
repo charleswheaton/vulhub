@@ -1,14 +1,20 @@
 version: '3.5'
 services:
   oap:
-    image: vulhub/skywalking:8.3.0
     command: bash bin/oap-service.sh
+    build:
+      context: .
+      dockerfile: containers/oap/Dockerfile
   web:
-    image: vulhub/skywalking:8.3.0
     command: bash bin/web-server.sh
     depends_on:
-      - oap
+    - oap
     ports:
-      - 8080:8080
+    - target: 8080
+      published: 0
+      protocol: tcp
     environment:
       COLLECTOR_RIBBON_LISTOFSERVERS: oap:12800
+    build:
+      context: .
+      dockerfile: containers/web/Dockerfile

@@ -1,7 +1,9 @@
 services:
   rmi:
-    build: "."
+    build: .
     ports:
-      - 1099:1099
+    - target: 1099
+      published: 0
+      protocol: tcp
     environment:
-      - RMIIP=192.168.31.88
+    - RMIIP=192.168.31.88

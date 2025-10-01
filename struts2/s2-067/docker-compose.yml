@@ -1,6 +1,12 @@
 services:
- struts2:
-   image: vulhub/struts2:s2-067
-   ports:
-    - "8080:8080"
-    - "5005:5005"
+  struts2:
+    ports:
+    - target: 8080
+      published: 0
+      protocol: tcp
+    - target: 5005
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/struts2/Dockerfile

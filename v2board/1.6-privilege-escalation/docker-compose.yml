@@ -1,22 +1,26 @@
 version: '2'
 services:
   web:
-    image: vulhub/v2board:1.6.1
     ports:
-     - "8080:80"
+    - 0:80
     depends_on:
-     - db
-     - redis
+    - db
+    - redis
     entrypoint:
-     - bash
-     - /entrypoint.sh
-    volumes:
-     - ./entrypoint.sh:/entrypoint.sh
+    - bash
+    - /entrypoint.sh
     command: apache2-foreground
+    build:
+      context: .
+      dockerfile: containers/web/Dockerfile
   db:
-   image: mysql:5.7
-   environment:
+    environment:
     - MYSQL_ROOT_PASSWORD=root
     - MYSQL_DATABASE=v2board
+    build:
+      context: .
+      dockerfile: containers/db/Dockerfile
   redis:
-   image: redis:7-alpine
+    build:
+      context: .
+      dockerfile: containers/redis/Dockerfile

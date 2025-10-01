@@ -1,18 +1,24 @@
 version: '2'
 services:
- ecshop27:
-   image: vulhub/ecshop:2.7.3
-   depends_on:
+  ecshop27:
+    depends_on:
     - mysql
-   ports:
-    - "8080:80"
- ecshop36:
-   image: vulhub/ecshop:3.6.0
-   depends_on:
+    ports:
+    - 0:80
+    build:
+      context: .
+      dockerfile: containers/ecshop27/Dockerfile
+  ecshop36:
+    depends_on:
     - mysql
-   ports:
-    - "8081:80"
- mysql:
-   image: mysql:5.5
-   environment: 
+    ports:
+    - 0:80
+    build:
+      context: .
+      dockerfile: containers/ecshop36/Dockerfile
+  mysql:
+    environment:
     - MYSQL_ROOT_PASSWORD=root
+    build:
+      context: .
+      dockerfile: containers/mysql/Dockerfile

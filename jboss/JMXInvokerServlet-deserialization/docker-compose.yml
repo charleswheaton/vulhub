@@ -1,6 +1,12 @@
 services:
   jboss:
-    image: vulhub/jboss:as-6.1.0
     ports:
-      - "9990:9990"
-      - "8080:8080"
+    - target: 9990
+      published: 0
+      protocol: tcp
+    - target: 8080
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/jboss/Dockerfile

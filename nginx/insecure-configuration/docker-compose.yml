@@ -1,11 +1,15 @@
 services:
- nginx:
-   image: vulhub/nginx:1
-   volumes:
-    - ./configuration:/etc/nginx/conf.d
-    - ./files/:/home/
-    - ./www/:/usr/share/nginx/html/
-   ports:
-    - "8080:8080"
-    - "8081:8081"
-    - "8082:8082"
+  nginx:
+    ports:
+    - target: 8080
+      published: 0
+      protocol: tcp
+    - target: 8081
+      published: 0
+      protocol: tcp
+    - target: 8082
+      published: 0
+      protocol: tcp
+    build:
+      context: .
+      dockerfile: containers/nginx/Dockerfile
