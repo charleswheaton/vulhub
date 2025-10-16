@@ -1,0 +1,22 @@
+{
+  "inclusion": {
+    "provider": "vulhub",
+    "compose_dir": "/data/vulhub/php/inclusion",
+    "primary_service": "php",
+    "primary_http_ports": [
+      80,
+      8080,
+      3000,
+      5000
+    ],
+    "health": {
+      "path": "/",
+      "expect_status": [
+        200,
+        302,
+        401,
+        403
+      ]
+    }
+  }
+}
